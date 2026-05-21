@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Адмінпанель | DentCareIF</title>
+
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar__logo">
+        DentCareIF
+      </div>
+
+      <nav class="admin-sidebar__nav">
+        <button class="admin-sidebar__link active" data-section="dashboard">
+          Dashboard
+        </button>
+
+        <button class="admin-sidebar__link" data-section="appointments">
+          Записи
+        </button>
+
+        <button class="admin-sidebar__link" data-section="contacts">
+          Звернення
+        </button>
+
+        <button class="admin-sidebar__link" data-section="phone-leads">
+          Телефонні заявки
+        </button>
+
+        <button class="admin-sidebar__link" data-section="patients">
+          Пацієнти
+        </button>
+
+        <button class="admin-sidebar__link" data-section="doctors">
+          Лікарі
+        </button>
+
+        <button class="admin-sidebar__link" data-section="services">
+          Послуги
+        </button>
+
+        <button class="admin-sidebar__link" data-section="categories">
+          Категорії послуг
+        </button>
+      </nav>
+    </aside>
+
+    <div class="admin-main">
+      <header class="admin-header">
+        <div>
+          <h1 class="admin-header__title">
+            Адмінпанель
+          </h1>
+
+          <p class="admin-header__subtitle">
+            Управління стоматологічною клінікою
+          </p>
+        </div>
+
+        <div class="admin-header__actions">
+          <span id="adminUserEmail"></span>
+
+          <button class="admin-button admin-button--logout" id="logoutButton">
+            Вийти
+          </button>
+        </div>
+      </header>
+
+      <main class="admin-content">
+        <section class="admin-section active" id="dashboardSection">
+          <div class="admin-cards">
+            <div class="admin-card">
+              <h3>Нові записи</h3>
+              <p id="newAppointmentsCount">0</p>
+            </div>
+
+            <div class="admin-card">
+              <h3>Сьогоднішні записи</h3>
+              <p id="todayAppointmentsCount">0</p>
+            </div>
+
+            <div class="admin-card">
+              <h3>Пацієнти</h3>
+              <p id="patientsCount">0</p>
+            </div>
+
+            <div class="admin-card">
+              <h3>Звернення</h3>
+              <p id="contactRequestsCount">0</p>
+            </div>
+
+            <div class="admin-card">
+              <h3>Телефонні заявки</h3>
+              <p id="phoneLeadsCount">0</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="admin-section" id="categoriesSection">
+          <div class="admin-section-header">
+            <div>
+              <h2>Категорії послуг</h2>
+              <p>Керування групами стоматологічних послуг</p>
+            </div>
+
+            <button id="addCategoryButton" class="admin-button admin-button--primary" type="button"
+              style="width: 200px;">
+              Додати категорію
+            </button>
+          </div>
+
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Назва</th>
+                  <th>Slug</th>
+                  <th>Опис</th>
+                  <th>Послуг</th>
+                  <th>Статус</th>
+                  <th>Дії</th>
+                </tr>
+              </thead>
+              <tbody id="categoriesTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="admin-section" id="servicesSection">
+          <div class="admin-section-header">
+            <div>
+              <h2>Послуги</h2>
+              <p>Керування стоматологічними послугами клініки</p>
+            </div>
+
+            <button class="admin-button admin-button--primary" type="button" id="addServiceButton">
+              Додати послугу
+            </button>
+          </div>
+
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Назва</th>
+                  <th>Категорія</th>
+                  <th>Ціна</th>
+                  <th>Тривалість</th>
+                  <th>Статус</th>
+                  <th>Дії</th>
+                </tr>
+              </thead>
+              <tbody id="servicesTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="admin-section" id="doctorsSection">
+          <div class="admin-section-header">
+            <div>
+              <h2>Лікарі</h2>
+              <p>Керування лікарями, спеціалізаціями та послугами</p>
+            </div>
+
+            <button class="admin-button admin-button--primary" type="button" id="addDoctorButton">
+              Додати лікаря
+            </button>
+          </div>
+
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ПІБ</th>
+                  <th>Посада</th>
+                  <th>Досвід</th>
+                  <th>Послуги</th>
+                  <th>Статус</th>
+                  <th>Дії</th>
+                </tr>
+              </thead>
+              <tbody id="doctorsTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="admin-section" id="appointmentsSection">
+          <div class="admin-section-header">
+            <div>
+              <h2>Записи</h2>
+              <p>Керування онлайн-записами пацієнтів</p>
+            </div>
+          </div>
+
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Пацієнт</th>
+                  <th>Телефон</th>
+                  <th>Послуга</th>
+                  <th>Лікар</th>
+                  <th>Дата</th>
+                  <th>Час</th>
+                  <th>Статус</th>
+                  <th>Дії</th>
+                </tr>
+              </thead>
+              <tbody id="appointmentsTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="admin-section" id="patientsSection">
+  <div class="admin-section-header">
+    <div>
+      <h2>Пацієнти</h2>
+      <p>Картки пацієнтів та історія записів</p>
+    </div>
+  </div>
+
+  <div class="admin-filters">
+    <input
+      type="text"
+      id="patientsSearchInput"
+      placeholder="Пошук за прізвищем або номером телефону"
+    >
+
+    <button class="admin-button admin-button--primary" type="button" id="patientsSearchButton">
+      Пошук
+    </button>
+
+    <button class="admin-button admin-button--secondary" type="button" id="patientsResetButton">
+      Скинути
+    </button>
+  </div>
+
+  <div class="admin-table-wrapper">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Пацієнт</th>
+          <th>Телефон</th>
+          
+          <th>Кількість записів</th>
+          <th>Дата створення</th>
+          <th>Дії</th>
+        </tr>
+      </thead>
+      <tbody id="patientsTableBody"></tbody>
+    </table>
+  </div>
+</section>
+
+        
+        <section class="admin-section" id="contactsSection">
+  <div class="admin-section-header">
+    <div>
+      <h2>Звернення</h2>
+      <p>Повідомлення з контактних форм сайту</p>
+    </div>
+  </div>
+
+  <div class="admin-table-wrapper">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Ім’я</th>
+          <th>Телефон</th>
+          <th>Email</th>
+          <th>Тема</th>
+          <th>Повідомлення</th>
+          <th>Статус</th>
+          <th>Дата</th>
+          <th>Дії</th>
+        </tr>
+      </thead>
+      <tbody id="contactsTableBody"></tbody>
+    </table>
+  </div>
+</section>
+
+        
+        
+        <section class="admin-section" id="phone-leadsSection">
+  <div class="admin-section-header">
+  <div>
+    <h2>Телефонні заявки</h2>
+    <p>Список номерів для зв’язку та розсилок</p>
+  </div>
+
+  <button
+    class="admin-button admin-button--primary"
+    type="button"
+    id="exportPhoneLeadsButton"
+  >
+    Експорт CSV
+  </button>
+</div>
+
+  <div class="admin-table-wrapper">
+    <table class="admin-table">
+      <thead>
+  <tr>
+    <th>Телефон</th>
+    <th>Статус</th>
+    <th>Дата</th>
+    <th>Дії</th>
+  </tr>
+</thead>
+      <tbody id="phoneLeadsTableBody"></tbody>
+    </table>
+  </div>
+</section>
+      
+      
+      </main>
+    </div>
+  </div>
+
+  <div class="admin-modal" id="categoryModal">
+    <div class="admin-modal__overlay" data-close-modal></div>
+
+    <div class="admin-modal__content">
+      <div class="admin-modal__header">
+        <h3 id="categoryModalTitle">Категорія послуг</h3>
+        <button class="admin-modal__close" type="button" data-close-modal>×</button>
+      </div>
+
+      <form id="categoryForm">
+        <input type="hidden" id="categoryId" name="id">
+
+        <div class="admin-form-group">
+          <label for="categoryTitle">Назва</label>
+          <input type="text" id="categoryTitle" name="title" required>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="categorySlug">Slug</label>
+          <input type="text" id="categorySlug" name="slug" required>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="categoryDescription">Опис</label>
+          <textarea id="categoryDescription" name="description"></textarea>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="categorySortOrder">Порядок</label>
+          <input type="number" id="categorySortOrder" name="sortOrder" value="0">
+        </div>
+
+        <button class="admin-button admin-button--primary" type="submit">
+          Зберегти
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="admin-modal" id="serviceModal">
+    <div class="admin-modal__overlay" data-close-service-modal></div>
+
+    <div class="admin-modal__content">
+      <div class="admin-modal__header">
+        <h3 id="serviceModalTitle">Послуга</h3>
+        <button class="admin-modal__close" type="button" data-close-service-modal>×</button>
+      </div>
+
+      <form id="serviceForm">
+        <input type="hidden" id="serviceId" name="id">
+
+        <div class="admin-form-group">
+          <label for="serviceCategoryId">Категорія</label>
+          <select id="serviceCategoryId" name="categoryId" required></select>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="serviceTitle">Назва</label>
+          <input type="text" id="serviceTitle" name="title" required>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="serviceSlug">Slug</label>
+          <input type="text" id="serviceSlug" name="slug" required>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="serviceShortDesc">Короткий опис</label>
+          <textarea id="serviceShortDesc" name="shortDesc"></textarea>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="serviceFullDesc">Повний опис</label>
+          <textarea id="serviceFullDesc" name="fullDesc"></textarea>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="serviceIndications">Коли варто звернутися</label>
+          <textarea id="serviceIndications" name="indications" placeholder="Кожен пункт з нового рядка"></textarea>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="serviceIncluded">Що входить у послугу</label>
+          <textarea id="serviceIncluded" name="included" placeholder="Кожен пункт з нового рядка"></textarea>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="serviceSteps">Етапи лікування</label>
+          <textarea id="serviceSteps" name="steps" placeholder="Назва етапу | Опис етапу"></textarea>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="serviceFaqs">FAQ</label>
+          <textarea id="serviceFaqs" name="faqs" placeholder="Питання | Відповідь"></textarea>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="servicePrice">Ціна, грн</label>
+          <input type="number" id="servicePrice" name="price" min="0">
+        </div>
+
+        <div class="admin-form-group">
+          <label for="serviceDuration">Тривалість, хв</label>
+          <input type="number" id="serviceDuration" name="duration" min="30" step="30" required>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="serviceBadge">Бейдж</label>
+          <input type="text" id="serviceBadge" name="badge">
+        </div>
+
+        <div class="admin-form-group">
+          <label for="serviceImage">Зображення URL</label>
+          <input type="text" id="serviceImage" name="image">
+        </div>
+
+        <div class="admin-form-group">
+          <label for="serviceSortOrder">Порядок</label>
+          <input type="number" id="serviceSortOrder" name="sortOrder" value="0">
+        </div>
+
+        <button class="admin-button admin-button--primary" type="submit">
+          Зберегти
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="admin-modal" id="doctorModal">
+    <div class="admin-modal__overlay" data-close-doctor-modal></div>
+
+    <div class="admin-modal__content">
+      <div class="admin-modal__header">
+        <h3 id="doctorModalTitle">Лікар</h3>
+        <button class="admin-modal__close" type="button" data-close-doctor-modal>×</button>
+      </div>
+
+      <form id="doctorForm">
+        <input type="hidden" id="doctorId" name="id">
+
+        <div class="admin-form-group">
+          <label for="doctorFirstName">Ім’я</label>
+          <input type="text" id="doctorFirstName" name="firstName" required>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="doctorLastName">Прізвище</label>
+          <input type="text" id="doctorLastName" name="lastName" required>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="doctorSlug">Slug</label>
+          <input type="text" id="doctorSlug" name="slug" required>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="doctorPosition">Посада</label>
+          <input type="text" id="doctorPosition" name="position" required>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="doctorExperience">Досвід, років</label>
+          <input type="number" id="doctorExperience" name="experience" min="0">
+        </div>
+
+        <div class="admin-form-group">
+          <label for="doctorEducation">Освіта</label>
+          <textarea id="doctorEducation" name="education"></textarea>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="doctorCertificates">Сертифікати</label>
+          <textarea id="doctorCertificates" name="certificates"
+            placeholder="Наприклад: Сертифікат з ендодонтії, курс з мікроскопної стоматології..."></textarea>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="doctorDescription">Опис</label>
+          <textarea id="doctorDescription" name="description"></textarea>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="doctorImage">Зображення URL</label>
+          <input type="text" id="doctorImage" name="image">
+        </div>
+
+        <div class="admin-form-group">
+          <label for="doctorServiceIds">Послуги</label>
+          <select id="doctorServiceIds" name="serviceIds" multiple></select>
+        </div>
+
+        <div class="admin-form-group">
+          <label for="doctorSortOrder">Порядок</label>
+          <input type="number" id="doctorSortOrder" name="sortOrder" value="0">
+        </div>
+
+        <button class="admin-button admin-button--primary" type="submit">
+          Зберегти
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="admin-modal" id="scheduleModal">
+    <div class="admin-modal__overlay" data-close-schedule-modal></div>
+
+    <div class="admin-modal__content">
+      <div class="admin-modal__header">
+        <h3 id="scheduleModalTitle">Графік лікаря</h3>
+
+        <button class="admin-modal__close" type="button" data-close-schedule-modal>
+          ×
+        </button>
+      </div>
+
+      <form id="scheduleForm">
+        <input type="hidden" id="scheduleDoctorId">
+
+        <div class="admin-grid">
+          <div class="admin-form-group">
+            <label for="scheduleDay">День тижня</label>
+
+            <select id="scheduleDay" required>
+              <option value="1">Понеділок</option>
+              <option value="2">Вівторок</option>
+              <option value="3">Середа</option>
+              <option value="4">Четвер</option>
+              <option value="5">Пʼятниця</option>
+              <option value="6">Субота</option>
+              <option value="7">Неділя</option>
+            </select>
+          </div>
+
+          <div class="admin-form-group">
+            <label for="scheduleStartTime">Початок</label>
+
+            <input type="time" id="scheduleStartTime" required>
+          </div>
+
+          <div class="admin-form-group">
+            <label for="scheduleEndTime">Кінець</label>
+
+            <input type="time" id="scheduleEndTime" required>
+          </div>
+        </div>
+
+        <button class="admin-button admin-button--primary" type="submit">
+          Додати день
+        </button>
+      </form>
+
+      <div class="admin-table-wrapper admin-mt">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>День</th>
+              <th>Початок</th>
+              <th>Кінець</th>
+              <th>Статус</th>
+              <th>Дії</th>
+            </tr>
+          </thead>
+
+          <tbody id="scheduleTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="admin-modal" id="patientModal">
+  <div class="admin-modal__overlay" data-close-patient-modal></div>
+
+  <div class="admin-modal__content">
+    <div class="admin-modal__header">
+      <h3 id="patientModalTitle">Картка пацієнта</h3>
+      <button class="admin-modal__close" type="button" data-close-patient-modal>×</button>
+    </div>
+
+    <div id="patientDetails"></div>
+
+    <div class="admin-table-wrapper admin-mt">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Дата</th>
+            <th>Час</th>
+            <th>Послуга</th>
+            <th>Лікар</th>
+            <th>Статус</th>
+            <th>Коментар</th>
+          </tr>
+        </thead>
+        <tbody id="patientAppointmentsTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+  <script src="assets/js/admin-config.js"></script>
+  <script src="assets/js/dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>DentCareIF</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    
+    <link href="img/favicon.png" rel="icon">
+
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary m-1" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-dark m-1" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-secondary m-1" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-light ps-5 pe-0 d-none d-lg-block">
+        <div class="row gx-0">
+            <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center">
+                    <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Графік роботи: Пн-Пт: 9.00 -
+                        19.00, Сб: 10.00 - 17.00 </small>
+                </div>
+            </div>
+            <div class="col-md-6 text-center text-lg-end">
+                <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
+                    <div class="me-3 pe-3 border-end py-2">
+                        <a href="mailto:info@dentcare.if.ua" class="m-0 text-white"><i
+                                class="fa fa-envelope-open me-2"></i>info@dentcare.if.ua</a>
+                    </div>
+                    <div class="py-2">
+                        <a href="tel:+380999998877" class="m-0 text-white"><i class="fa fa-phone-alt me-2"></i>+38 099
+                            999 88 77</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+        <a href="index.html" class="navbar-brand p-0">
+            <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCareIF</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="index.html" class="nav-item nav-link">Головна</a>
+                <a href="about.html" class="nav-item nav-link">Про клініку</a>
+                <a href="service.html" class="nav-item nav-link active">Послуги</a>
+                <a href="gallery.html" class="nav-item nav-link">Наші роботи</a>
+                <a href="contact.html" class="nav-item nav-link">Контакти</a>
+                <a href="admin/admin/login.html" class="nav-item nav-link" target="_blank"><i
+                        class="bi bi-box-arrow-in-right"></i></a>
+            </div>
+
+            <a href="appointment.html" class="btn btn-primary py-2 px-4 ms-3">Онлайн запис</a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+
+    <!-- Full Screen Search Start -->
+    <div class="modal fade" id="searchModal" tabindex="-1">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content" style="background: rgba(9, 30, 62, .7);">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn bg-white btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex align-items-center justify-content-center">
+                    <div class="input-group" style="max-width: 600px;">
+                        <input type="text" class="form-control bg-transparent border-primary p-3"
+                            placeholder="Введіть слова для пошуку">
+                        <button class="btn btn-primary px-4"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Full Screen Search End -->
+
+
+    <!-- Hero Start -->
+    <div class="container-fluid bg-primary py-5 hero-header mb-5">
+        <div class="row py-3">
+            <div class="col-12 text-center">
+                <h1 class="display-3 text-white animated zoomIn">Послуги</h1>
+                <a href="" class="h4 text-white">Головна</a>
+                <i class="far fa-circle text-white px-2"></i>
+                <span href="" class="h4 text-white">Послуги</span>
+            </div>
+        </div>
+    </div>
+    <!-- Hero End -->
+
+
+    <!-- Team Start -->
+    <div class="container-fluid py-5 mt-5">
+        <div class="container">
+            <div class="section-title text-center mb-5">
+                <h5 class="position-relative d-inline-block text-primary text-uppercase">Послуги</h5>
+                <h1 class="display-5 mb-0">Комплексні стоматологічні послуги</h1>
+            </div>
+
+            <div class="service-filter d-flex flex-wrap justify-content-center gap-2 mb-5" id="serviceFilter"></div>
+
+            <div class="row g-5" id="servicesGrid"></div>
+
+        </div>
+    </div>
+    <!-- Team End -->
+
+
+    <!-- Newsletter Start -->
+    <div class="container-fluid position-relative pt-5 wow fadeInUp" data-wow-delay="0.1s" style="z-index: 1;">
+        <div class="container">
+            <div class="bg-primary p-5 rounded">
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-7">
+                        <h2 class="text-white mb-3">
+                            Потрібна швидка консультація?
+                        </h2>
+
+                        <p class="text-white mb-0">
+                            Залиште номер телефону – адміністратор клініки передзвонить вам для консультації та допоможе
+                            підібрати зручний час прийому.
+                        </p>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <form id="phoneLeadForm">
+                            <div class="input-group">
+                                <input type="tel" class="form-control border-white p-3" id="phoneLeadInput"
+                                    placeholder="+38 (0__) ___-__-__" autocomplete="tel" inputmode="tel" maxlength="19"
+                                    required>
+
+                                <button class="btn btn-dark px-4" type="submit">
+                                    Передзвоніть мені
+                                </button>
+                            </div>
+
+                            <div class="text-white small mt-2">
+                                Натискаючи кнопку, ви погоджуєтесь на обробку персональних даних.
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Newsletter End -->
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light py-5 wow fadeInUp" data-wow-delay="0.3s">
+        <div class="container pt-5">
+            <div class="row g-5 pt-4">
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white mb-4">Навігація</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-light mb-2" href="index.html"><i
+                                class="bi bi-arrow-right text-primary me-2"></i>Головна</a>
+                        <a class="text-light mb-2" href="about.html"><i
+                                class="bi bi-arrow-right text-primary me-2"></i>Про клініку</a>
+                        <a class="text-light mb-2" href="service.html"><i
+                                class="bi bi-arrow-right text-primary me-2"></i>Послуги</a>
+                        <a class="text-light mb-2" href="gallery.html"><i
+                                class="bi bi-arrow-right text-primary me-2"></i>Наші роботи</a>
+                        <a class="text-light" href="contact.html"><i
+                                class="bi bi-arrow-right text-primary me-2"></i>Контакти</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white mb-4">Послуги</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-light mb-2" href="service-details.html?slug=therapeutic-dentistry"><i
+                                class="bi bi-arrow-right text-primary me-2"></i>Терапевтична стоматологія</a>
+                        <a class="text-light mb-2" href="service-details.html?slug=implantation"><i
+                                class="bi bi-arrow-right text-primary me-2"></i>Імплантація зубів</a>
+                        <a class="text-light mb-2" href="service-details.html?slug=prosthetic-dentistry"><i
+                                class="bi bi-arrow-right text-primary me-2"></i>Ортопедична стоматологія</a>
+                        <a class="text-light mb-2" href="service-details.html?slug=teeth-whitening"><i
+                                class="bi bi-arrow-right text-primary me-2"></i>Відбілювання зубів</a>
+                        <a class="text-light" href="service.html"><i class="bi bi-arrow-right text-primary me-2"></i>Всі
+                            послуги</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white mb-4">Контакти</h3>
+                    <p class="mb-2">
+                        <a href="https://maps.app.goo.gl/dPuKLB8MaYja9VnT8" target="_blank">
+                            <i class="bi bi-geo-alt text-primary me-2"></i>м. Івано-Франківськ, вул. Незалежнсті, 5
+                        </a>
+                    </p>
+                    <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i><a
+                            href="mailto:info@dentcare.if.ua" class="text-light">info@dentcare.if.ua</a></p>
+                    <p class="mb-2"><i class="bi bi-telephone text-primary me-2"></i><a href="tel:+380999998877"
+                            class="text-light">+38 099 999 88 77</a></p>
+                    <p class="mb-0"><i class="far fa-clock text-primary me-2"></i>Пн-Сб: 9:00 – 19:00</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white mb-4">Соціальні мережі</h3>
+                    <p class="mb-3">Слідкуйте за новинами клініки, корисними порадами та оновленнями послуг.</p>
+                    <div class="d-flex">
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"
+                            aria-label="Facebook DentCareIF"><i class="fab fa-facebook-f fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"
+                            aria-label="LinkedIn DentCareIF"><i class="fab fa-linkedin-in fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded" href="#"
+                            aria-label="Instagram DentCareIF"><i class="fab fa-instagram fw-normal"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid text-light py-4" style="background: #051225;">
+        <div class="container">
+            <div class="row g-0">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="index.html">DentCareIF</a>. Всі
+                        права захищено.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Success Modal Start -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content success-modal border-0">
+                <div class="modal-body text-center p-5">
+                    <div class="success-modal-icon mb-4">
+                        <i class="fa fa-check"></i>
+                    </div>
+
+                    <h2 class="mb-3" id="successModalLabel">
+                        Дякуємо за звернення!
+                    </h2>
+
+                    <p class="mb-4" id="successModalText">
+                        Ваше повідомлення успішно надіслано. Адміністратор клініки зв’яжеться з вами найближчим часом.
+                    </p>
+
+                    <button type="button" class="btn btn-primary py-3 px-5" data-bs-dismiss="modal">
+                        Закрити
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Success Modal End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="lib/twentytwenty/jquery.event.move.js"></script>
+    <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/uk.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

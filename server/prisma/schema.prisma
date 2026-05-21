@@ -1,0 +1,285 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum UserRole {
+  SUPERADMIN
+  ADMIN
+}
+
+enum AppointmentStatus {
+  NEW
+  CONFIRMED
+  DONE
+  CANCELED
+}
+
+enum RequestStatus {
+  NEW
+  PROCESSED
+}
+
+enum LeadStatus {
+  NEW
+  PROCESSED
+}
+
+enum AppointmentSource {
+  ONLINE
+  ADMIN
+}
+
+model AdminUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  role      UserRole @default(ADMIN)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ServiceCategory {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  description String?
+  image       String?
+
+  isActive    Boolean   @default(true)
+  sortOrder   Int       @default(0)
+
+  services    Service[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Service {
+  id           String    @id @default(cuid())
+
+  categoryId   String
+  category     ServiceCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  title        String
+  slug         String    @unique
+
+  shortDesc    String?
+  fullDesc     String?
+
+  price        Decimal?  @db.Decimal(10, 2)
+
+  duration     Int
+
+  image        String?
+  badge        String?
+
+  isActive     Boolean   @default(true)
+  sortOrder    Int       @default(0)
+
+  doctorLinks  DoctorService[]
+  appointments Appointment[]
+
+  indications ServiceIndication[]
+  steps       ServiceStep[]
+  included    ServiceIncludedItem[]
+  faqs        ServiceFaq[]
+
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model ServiceIndication {
+  id        String   @id @default(cuid())
+  serviceId String
+  service   Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  text      String
+  sortOrder Int      @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ServiceStep {
+  id        String   @id @default(cuid())
+  serviceId String
+  service   Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  title     String
+  text      String
+  sortOrder Int      @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ServiceIncludedItem {
+  id        String   @id @default(cuid())
+  serviceId String
+  service   Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  text      String
+  sortOrder Int      @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ServiceFaq {
+  id        String   @id @default(cuid())
+  serviceId String
+  service   Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  question  String
+  answer    String
+  sortOrder Int      @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Doctor {
+  id            String    @id @default(cuid())
+
+  firstName     String
+  lastName      String
+
+  slug          String    @unique
+
+  position      String
+  experience    Int?
+
+  education     String?
+  description   String?
+
+  image         String?
+
+  isActive      Boolean   @default(true)
+  sortOrder     Int       @default(0)
+
+  services      DoctorService[]
+  schedules     DoctorSchedule[]
+  appointments  Appointment[]
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  certificates String?
+}
+
+model DoctorService {
+  id         String   @id @default(cuid())
+
+  doctorId   String
+  serviceId  String
+
+  doctor     Doctor   @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  service    Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  createdAt  DateTime @default(now())
+
+  @@unique([doctorId, serviceId])
+}
+
+
+
+model DoctorSchedule {
+  id          String   @id @default(cuid())
+
+  doctorId    String
+  doctor      Doctor   @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+
+  dayOfWeek   Int
+
+  startTime   String
+  endTime     String
+
+  isActive    Boolean  @default(true)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([doctorId, dayOfWeek])
+}
+
+model Patient {
+  id            String   @id @default(cuid())
+
+  firstName     String
+  lastName      String?
+
+  phone         String   @unique
+  email         String?
+
+  birthDate     DateTime?
+
+  comment       String?
+
+  appointments  Appointment[]
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Appointment {
+  id                 String              @id @default(cuid())
+
+  patientId          String
+  patient            Patient            @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  doctorId           String
+  doctor             Doctor             @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+
+  serviceId          String
+  service            Service            @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  appointmentDate    DateTime
+
+  startTime          String
+  endTime            String
+
+  status             AppointmentStatus  @default(NEW)
+
+  source             AppointmentSource  @default(ONLINE)
+
+  comment            String?
+
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+}
+
+model ContactRequest {
+  id          String        @id @default(cuid())
+
+  name        String
+  phone       String
+  email       String?
+
+  subject     String?
+  message     String
+
+  status      RequestStatus @default(NEW)
+
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model PhoneLead {
+  id          String      @id @default(cuid())
+
+  phone       String
+
+  source      String?
+
+  status      LeadStatus  @default(NEW)
+
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
