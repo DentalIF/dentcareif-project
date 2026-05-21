@@ -1,1 +1,1 @@
-window.ADMIN_API_BASE_URL = 'http://localhost:5000'
+window.ADMIN_API_BASE_URL = 'https://dentcareif-project.onrender.com'
