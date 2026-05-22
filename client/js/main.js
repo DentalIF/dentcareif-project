@@ -424,9 +424,7 @@ doctorFilterButtons.forEach(function (button) {
 const contactForm = document.getElementById('contactForm');
 
 if (contactForm) {
-
-    contactForm.addEventListener('submit', function (event) {
-
+    contactForm.addEventListener('submit', async function (event) {
         event.preventDefault();
 
         if (!contactForm.checkValidity()) {
@@ -434,14 +432,38 @@ if (contactForm) {
             return;
         }
 
-        const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        const contactData = {
+            name: document.getElementById('contactName').value.trim(),
+            phone: document.getElementById('contactPhone').value.trim(),
+            email: document.getElementById('contactEmail').value.trim(),
+            subject: document.getElementById('contactSubject').value.trim(),
+            message: document.getElementById('contactMessage').value.trim()
+        };
 
-        successModal.show();
+        try {
+            const response = await fetch(`${window.API_BASE_URL}/api/contact-requests`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(contactData),
+            });
 
-        contactForm.reset();
+            const result = await response.json();
 
+            if (!response.ok) {
+                throw new Error(result.message || 'Не вдалося відправити звернення');
+            }
+
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+            contactForm.reset();
+
+        } catch (error) {
+            console.error('Contact form submit error:', error);
+            alert(error.message);
+        }
     });
-
 }
 
 const callbackForm = document.getElementById('callbackForm');
